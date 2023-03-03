@@ -1,0 +1,11 @@
+{
+  "name": "bazel-filegroup-example",
+  "scripts": {
+    "run-ci": "ts-node ./scripts/run-ci.ts",
+    "bazel-sync": "ts-node ./scripts/sync-filegroups.ts"
+  },
+  "workspaces": [
+    "packages/upstream-library",
+    "packages/downstream-application"
+  ]
+}
