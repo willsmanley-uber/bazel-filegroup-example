@@ -1,8 +1,10 @@
-export const classifyFiles = (files: Array<string>)  => {
+import { getPackageNameFromBazelLabel } from "./pathname-utils";
+
+export const classifyFiles = async (files)  => {
     const fileClassificationsGroupedByProject = {};
     files.forEach((file) => {
         // file classifications only really matter at the project level, so we can group them
-        const project = getProjectFromFile(file);
+        const project = getPackageNameFromBazelLabel(file);
         if(!fileClassificationsGroupedByProject[project]){
             fileClassificationsGroupedByProject[project] = {
                 testFiles: [],
@@ -19,9 +21,7 @@ export const classifyFiles = (files: Array<string>)  => {
         } else {
             fileClassificationsGroupedByProject[project].configFiles.push(file);
         }
-    })
-}
+    });
 
-const getProjectFromFile = (file: string): string => {
-    return 'downstream-application';
+    return fileClassificationsGroupedByProject;
 }

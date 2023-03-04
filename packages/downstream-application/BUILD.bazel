@@ -1,0 +1,45 @@
+filegroup(
+    name = "src/use-constants.js",
+    srcs = [
+        '//packages/upstream-library:src/constants.js'
+    ],
+)
+
+filegroup(
+    name = "src/use-utils.js",
+    srcs = [
+        '//packages/upstream-library:src/utils.js'
+    ],
+)
+
+filegroup(
+    name = "src/index.js",
+    srcs = [
+        ':src/use-utils.js',
+        ':src/use-constants.js'
+    ],
+)
+
+filegroup(
+    name = "__tests__/test-use-utils.js",
+    srcs = [
+        ':src/use-utils.js'
+    ],
+)
+
+filegroup(
+    name = "__tests__/test-use-constants.js",
+    srcs = [
+        ':src/use-constants.js'
+    ],
+)
+
+filegroup(
+    name = "__integration__/integration-test.js",
+    srcs = [],
+)
+
+filegroup(
+    name = "package.json",
+    srcs = [],
+)

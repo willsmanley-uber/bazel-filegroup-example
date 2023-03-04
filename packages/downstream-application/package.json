@@ -1,0 +1,7 @@
+{
+    "name": "downstream-application",
+    "version": "1.0.0",
+    "dependencies": {
+        "upstream-library": "1.0.0"
+    }
+}

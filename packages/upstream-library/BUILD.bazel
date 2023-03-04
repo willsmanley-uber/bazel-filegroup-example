@@ -1,0 +1,19 @@
+exports_files([
+    "src/utils.js",
+    "src/constants.js"
+])
+
+filegroup(
+    name = "src/constants.ts",
+    srcs = [],
+)
+
+filegroup(
+    name = "src/utils.ts",
+    srcs = [],
+)
+
+filegroup(
+    name = "package.json",
+    srcs = [],
+)

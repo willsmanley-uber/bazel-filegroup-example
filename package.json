@@ -1,14 +1,13 @@
 {
   "name": "bazel-filegroup-example",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "run-ci": "ts-node ./scripts/run-ci.ts",
-    "bazel-sync": "ts-node ./scripts/sync-filegroups.ts"
+    "ci": "node --experimental-specifier-resolution=node ./scripts/ci.js",
+    "bazel-sync": "node --experimental-specifier-resolution=node ./scripts/sync-filegroups.js"
   },
   "workspaces": [
     "packages/upstream-library",
     "packages/downstream-application"
-  ],
-  "devDependencies": {
-    "@types/node": "^18.14.5"
-  }
+  ]
 }
