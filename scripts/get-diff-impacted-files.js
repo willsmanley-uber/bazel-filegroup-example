@@ -9,7 +9,6 @@ export const getDiffImpactedFiles = async (changedFiles) => {
         const label = filenameToBazelLabel(file);
         const {stdout} = await execPromise(`bazel query 'rdeps(..., ${label})'`);
         stdout.split('\n').forEach((file) => {
-            console.log(file);
             diffImpactedFiles.add(file);
         })   
     }
