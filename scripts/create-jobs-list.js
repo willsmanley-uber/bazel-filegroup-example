@@ -11,13 +11,18 @@ export const createJobsList = async (fileClassificationsGroupedByProject) => {
         let jobs = [
             'typecheck'
         ];
-        if(fileClassifications.testFiles.length){
+        if(fileClassifications.unitTestFiles.length){
             jobs.push({
                 'some unit tests': fileClassifications.testFiles
             })
         }
+
         if(fileClassifications.sourceCodeFiles.length){
             jobs.push('all integration tests')
+        } else if(fileClassifications.integrationTestFiles.length){
+            jobs.push({
+                'some integration tests': fileClassifications.testFiles
+            })
         }
 
         return [projectName, jobs];
