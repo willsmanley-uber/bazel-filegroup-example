@@ -6,3 +6,5 @@ A few oversimplifications were made for the sake of brevity:
 - the git command to identify changed files is not what we will use in practice. `git diff` is nicer for a playground example because you don't have to create a new commit.
 - this example only deals with files that are in packages. it does not handle how we execute changes to root-level files like WORKSPACE
 - this example doesn't deal with changes to libraries
+
+To test 

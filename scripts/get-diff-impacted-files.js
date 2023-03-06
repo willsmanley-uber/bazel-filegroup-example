@@ -4,6 +4,8 @@ import { filenameToBazelLabel } from './pathname-utils';
 const execPromise = promisify(exec);
 
 export const getDiffImpactedFiles = async (changedFiles) => {
+    if(!changedFiles) return [];
+
     const diffImpactedFiles = new Set();
     for(const file of changedFiles){
         const label = filenameToBazelLabel(file);
