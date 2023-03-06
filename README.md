@@ -7,4 +7,33 @@ A few oversimplifications were made for the sake of brevity:
 - this example only deals with files that are in packages. it does not handle how we execute changes to root-level files like WORKSPACE
 - this example doesn't deal with changes to libraries
 
-To test 
+To test various changes and their minimum required jobs in CI:
+```
+npm run test-upstream-util-change
+
+npm run test-upstream-constant-change
+
+npm run test-downstream-unit-test-change
+
+npm run test-downstream-integration-test-change
+
+npm run test-downstream-source-file-change
+```
+
+We can provide the file-level dependencies to bazel by adding the following definitions to BUILD.bazel files within each project:
+
+```
+# which files are available to be imported by other projects (demonstrated in upstream-library)
+exports_files([
+    "src/utils.js",
+    "src/constants.js"
+])
+
+# list all imports for each file (intra-project and cross-project)
+filegroup(
+    name = "src/use-constants.js",
+    srcs = [
+        '//packages/upstream-library:src/constants.js'
+    ],
+)
+```
