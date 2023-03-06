@@ -1,11 +1,11 @@
 export const createJobsList = async (fileClassificationsGroupedByProject) => {
-    return Object.entries(fileClassificationsGroupedByProject).map(([projectName, fileClassifications]) => {
+    return Object.fromEntries(Object.entries(fileClassificationsGroupedByProject).map(([projectName, fileClassifications]) => {
         if(fileClassifications.configFiles.length){
-            return [
+            return [projectName, [
                 'all unit tests',
                 'all integration tests',
                 'typecheck',
-            ]
+            ]]
         }
 
         let jobs = [
@@ -19,5 +19,7 @@ export const createJobsList = async (fileClassificationsGroupedByProject) => {
         if(fileClassifications.sourceCodeFiles){
             jobs.push('all integration tests')
         }
-    });
+
+        return [projectName, jobs];
+    })); 
 }
