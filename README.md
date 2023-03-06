@@ -20,6 +20,19 @@ npm run test-downstream-integration-test-change
 npm run test-downstream-source-file-change
 ```
 
+To see what would happen for the same diff footprints, but using the current CI granularity (only project-level):
+```
+npm run test-old-upstream-util-change
+
+npm run test-old-upstream-constant-change
+
+npm run test-old-downstream-unit-test-change
+
+npm run test-old-downstream-integration-test-change
+
+npm run test-old-downstream-source-file-change
+```
+
 We can provide the file-level dependencies to bazel by adding the following definitions to BUILD.bazel files within each project:
 
 ```
@@ -38,16 +51,41 @@ filegroup(
 )
 ```
 
-Once we have import statements represented in our build files, our CI flow will essentially look like this:
+This is what the flow for our current CI granularity looks like: 
 ```
 // 1) get a list of all files that were directly modified from git
-getChangedFiles()
+const changedFiles = await getChangedFiles();
+
+// 2) get a list of projects that included file changes
+const changedProjects = await getChangedProjects(changedFiles);
+
+// 3) query bazel to get a list that includes all downstream projects that depend on the modified projects
+const impactedProjects = await getDiffImpactedProjects(changedProjects);
+
+// 4) get all jobs in impacted projects
+const jobsList = await getAllJobsForImpactedProjects(impactedProjects);
+
+// 5) spawn jobs to buildkite
+await spawnJobs(jobsList);
+```
+
+Once we have import statements represented in our build files, our new CI flow will essentially look like this:
+```
+// 1) get a list of all files that were directly modified from git
+const changedFiles = await getChangedFiles();
+
 // 2) query bazel to get a list that includes all downstream files that depend on the modified files
-.then(getDiffImpactedFiles)
-// 3) classify those files and group them by project
-.then(classifyFiles)
-// 4) create a jobs list for each project based on the file classifications
-.then(createJobsList)
-// 5) spawn affected projects into separate buildkite sub-builds with their respective jobs
-.then(spawnJobs)
+const impactedFiles = await getImpactedFiles(changedFiles);
+
+// 3) group changed and impacted files by project
+const filesGroupedByProject = await groupFilesByProject(changedFiles, impactedFiles);
+
+// 4) add classifications to changed and impacted files
+const classifiedFilesGroupedByProject = await classifyFiles(filesGroupedByProject);
+
+// 5) create jobs list for each project
+const jobsList = await createJobsList(classifiedFilesGroupedByProject);
+
+// 5) spawn jobs to buildkite
+await spawnJobs(jobsList);
 ```
