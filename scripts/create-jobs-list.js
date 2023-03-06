@@ -13,7 +13,7 @@ export const createJobsList = async (fileClassificationsGroupedByProject) => {
         ];
         if(fileClassifications.unitTestFiles.length){
             jobs.push({
-                'some unit tests': fileClassifications.testFiles
+                'some unit tests': fileClassifications.unitTestFiles
             })
         }
 
@@ -21,7 +21,7 @@ export const createJobsList = async (fileClassificationsGroupedByProject) => {
             jobs.push('all integration tests')
         } else if(fileClassifications.integrationTestFiles.length){
             jobs.push({
-                'some integration tests': fileClassifications.testFiles
+                'some integration tests': fileClassifications.integrationTestFiles
             })
         }
 
