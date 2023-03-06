@@ -5,6 +5,7 @@ export const classifyFiles = async (files)  => {
     files.forEach((file) => {
         // file classifications only really matter at the project level, so we can group them
         const project = getPackageNameFromBazelLabel(file);
+        console.log({file, project});
         if(!fileClassificationsGroupedByProject[project]){
             fileClassificationsGroupedByProject[project] = {
                 testFiles: [],
