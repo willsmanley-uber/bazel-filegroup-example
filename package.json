@@ -5,7 +5,12 @@
   "scripts": {
     "ci": "node --experimental-specifier-resolution=node --no-warnings ./scripts/ci.js",
     "ci-old": "node --experimental-specifier-resolution=node --no-warnings ./scripts/ci-old.js",
-    "bazel-sync": "node --experimental-specifier-resolution=node --no-warnings ./scripts/sync-filegroups.js"
+    "bazel-sync": "node --experimental-specifier-resolution=node --no-warnings ./scripts/sync-filegroups.js",
+    "test-upstream-util-change": "echo '' >> packages/upstream-library/src/utils.js && npm run ci && git reset --hard",
+    "test-upstream-constant-change": "echo '' >> packages/upstream-library/src/constants.js && npm run ci && git reset --hard",
+    "test-downstream-unit-test-change": "echo '' >> packages/downstream-application/__tests__/test-use-constants.js && npm run ci && git reset --hard",
+    "test-downstream-integration-test-change": "echo '' >> packages/downstream-application/__integration__/integration-test.js && npm run ci && git reset --hard",
+    "test-downstream-source-file-change": "echo '' >> packages/downstream-application/src/use-constants.js && npm run ci && git reset --hard"
   },
   "workspaces": [
     "packages/upstream-library",
