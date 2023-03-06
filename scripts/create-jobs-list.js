@@ -16,7 +16,7 @@ export const createJobsList = async (fileClassificationsGroupedByProject) => {
                 'some unit tests': fileClassifications.testFiles
             })
         }
-        if(fileClassifications.sourceCodeFiles){
+        if(fileClassifications.sourceCodeFiles.length){
             jobs.push('all integration tests')
         }
 
