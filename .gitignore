@@ -1,3 +1,4 @@
 .yarn/*
 .pnp.*
 /third_party/jazelle/temp
+.DS_Store
