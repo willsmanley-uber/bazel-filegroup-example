@@ -10,7 +10,12 @@
     "test-upstream-constant-change": "echo '' >> packages/upstream-library/src/constants.js && npm run ci && git reset --hard",
     "test-downstream-unit-test-change": "echo '' >> packages/downstream-application/__tests__/test-use-constants.js && npm run ci && git reset --hard",
     "test-downstream-integration-test-change": "echo '' >> packages/downstream-application/__integration__/integration-test.js && npm run ci && git reset --hard",
-    "test-downstream-source-file-change": "echo '' >> packages/downstream-application/src/use-constants.js && npm run ci && git reset --hard"
+    "test-downstream-source-file-change": "echo '' >> packages/downstream-application/src/use-constants.js && npm run ci && git reset --hard",
+    "test-old-upstream-util-change": "echo '' >> packages/upstream-library/src/utils.js && npm run ci-old && git reset --hard",
+    "test-old-upstream-constant-change": "echo '' >> packages/upstream-library/src/constants.js && npm run ci-old && git reset --hard",
+    "test-old-downstream-unit-test-change": "echo '' >> packages/downstream-application/__tests__/test-use-constants.js && npm run ci-old && git reset --hard",
+    "test-old-downstream-integration-test-change": "echo '' >> packages/downstream-application/__integration__/integration-test.js && npm run ci-old && git reset --hard",
+    "test-old-downstream-source-file-change": "echo '' >> packages/downstream-application/src/use-constants.js && npm run ci-old && git reset --hard"
   },
   "workspaces": [
     "packages/upstream-library",
