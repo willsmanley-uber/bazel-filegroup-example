@@ -1,45 +1,14 @@
-filegroup(
-    name = "src/use-constants.js",
-    srcs = [
-        '//packages/upstream-library:src/constants.js'
-    ],
-)
+exports_files(["__integration__/integration-test.js","__tests__/test-use-constants.js","__tests__/test-use-utils.js","src/index.js","src/use-constants.js","src/use-utils.js"])
 
-filegroup(
-    name = "src/use-utils.js",
-    srcs = [
-        '//packages/upstream-library:src/utils.js'
-    ],
-)
+filegroup(name = "__integration__/integration-test.js", srcs = [])
 
-filegroup(
-    name = "src/index.js",
-    srcs = [
-        ':src/use-utils.js',
-        ':src/use-constants.js'
-    ],
-)
+filegroup(name = "__tests__/test-use-constants.js", srcs = [":src/use-constants"])
 
-filegroup(
-    name = "__tests__/test-use-utils.js",
-    srcs = [
-        ':src/use-utils.js'
-    ],
-)
+filegroup(name = "__tests__/test-use-utils.js", srcs = [":src/use-utils"])
 
-filegroup(
-    name = "__tests__/test-use-constants.js",
-    srcs = [
-        ':src/use-constants.js'
-    ],
-)
+filegroup(name = "src/index.js", srcs = [":src/use-constants",":src/use-utils"])
 
-filegroup(
-    name = "__integration__/integration-test.js",
-    srcs = [],
-)
+filegroup(name = "src/use-constants.js", srcs = ["//packages/upstream-library:src/constants.js"])
 
-filegroup(
-    name = "package.json",
-    srcs = [],
-)
+filegroup(name = "src/use-utils.js", srcs = ["//packages/upstream-library:src/utils"])
+

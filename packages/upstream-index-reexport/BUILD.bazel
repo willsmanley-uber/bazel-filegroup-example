@@ -1,0 +1,8 @@
+exports_files(["src/constants.js","src/index.js","src/utils.js"])
+
+filegroup(name = "src/constants.js", srcs = [])
+
+filegroup(name = "src/index.js", srcs = [":src/constants.js",":src/utils.js"])
+
+filegroup(name = "src/utils.js", srcs = [])
+
