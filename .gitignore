@@ -3,3 +3,4 @@
 /third_party/jazelle/temp
 .DS_Store
 bazel-*
+node_modules
